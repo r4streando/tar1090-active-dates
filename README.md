@@ -141,6 +141,15 @@ The `.json` file contains gzip bytes because tar1090's lighttpd
 The first installation performs a full reconciliation. The timer then runs
 incrementally every six hours, with randomized delay.
 
+### Fresh-receiver behavior
+
+On a brand-new readsb installation, the first index build may legitimately report
+zero archived traces. readsb writes permanent per-aircraft globe-history files
+during the UTC day-rollover cycle rather than continuously throughout the day.
+If both the archive and Active Dates index are empty, `verify-install.sh` reports
+the index as **pending** rather than failed. Once readsb writes the first daily
+`trace_full_*.json` files, the next timer run will index them automatically.
+
 Check it with:
 
 ```bash
