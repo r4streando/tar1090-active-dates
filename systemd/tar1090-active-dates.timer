@@ -1,0 +1,12 @@
+[Unit]
+Description=Refresh tar1090 active-date index periodically
+
+[Timer]
+OnBootSec=10min
+OnUnitActiveSec=6h
+RandomizedDelaySec=10min
+Persistent=true
+Unit=tar1090-active-dates.service
+
+[Install]
+WantedBy=timers.target
