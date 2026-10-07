@@ -1,0 +1,15 @@
+[Unit]
+Description=Build tar1090 per-aircraft active-date index
+After=readsb.service
+
+[Service]
+Type=oneshot
+User=readsb
+ExecStart=/usr/local/sbin/tar1090-active-dates-index --root /var/globe_history
+Nice=10
+IOSchedulingClass=idle
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/globe_history
