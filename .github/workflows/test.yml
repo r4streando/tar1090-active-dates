@@ -1,0 +1,22 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: JavaScript tests
+        run: |
+          node --test test/activityHistory.local.test.js
+          node --check payload/activityHistory.js
+      - name: Python syntax
+        run: python3 -m py_compile apply-active-dates.py build-active-dates.py
+      - name: Shell syntax
+        run: bash -n install-indexer.sh uninstall-indexer.sh verify-install.sh
